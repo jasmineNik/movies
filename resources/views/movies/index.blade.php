@@ -1,5 +1,26 @@
 @extends('welcome')
 @section('Title', 'All Movies')
 @section('content')
-<h1>Hello movies {{ $name }} {{ $id }}</h1>
+    <table>
+    @forelse($movies as $movie)
+            <tr>
+                <td>{{$movie->name}}</td>
+                <td>{{$movie->desc}}</td>
+            </tr>
+    @empty
+        <p>No data</p>
+    @endforelse
+
+
+{{--@foreach($movies as $movie)--}}
+
+{{--       <tr>--}}
+{{--          <td>{{$movie['name']}}</td>--}}
+{{--          <td>{{$movie['desc']}}</td>--}}
+{{--       </tr>--}}
+
+{{--@endforeach--}}
+
+    </table>
 @endsection
+

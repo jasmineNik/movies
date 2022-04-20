@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MovieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,15 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+Route::view('/', 'welcome', ['name' => 'Admin']);
 //Route::get('/dashboard/{id?}', function ($id=null){
 //    return view('movies.index', ['name' => 'Admin', 'id' => $id]);
 //});
-Route::get('/dashboard/{id}/{name}', function ($id, $name){
-    return view('movies.index', ['name' => $name, 'id' => $id]);
+
+Route::get('/dashboard/{id?}/{name?}', function ($id=null, $name=null){
+    return view('dashboard', ['name' => $name, 'id' => $id]);
 })
 //    ->where('id', '[0-9]+')
     ->whereNumber('id')->whereAlpha('name')
     ->name('dashboard');
+
+Route::get('/movie', [MovieController::class, 'index'])
+    ->name('movie');
