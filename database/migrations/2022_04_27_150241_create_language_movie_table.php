@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('movies', function (Blueprint $table) {
+        Schema::create('language_movie', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('desc');
-            $table->string('poster')->nullable();
-            $table->date('date');
-            $table->float('price')->nullable();
-            $table->integer('views')->default(0);
+            $table->foreignId('movie_id')
+                  ->constrained('movies')
+                  ->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('language_id')
+                  ->constrained('languages')
+                  ->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('movies');
+        Schema::dropIfExists('language_movie');
     }
 };
