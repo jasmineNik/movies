@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Movie;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
 class MovieSeeder extends Seeder
@@ -15,6 +17,12 @@ class MovieSeeder extends Seeder
      */
     public function run()
     {
-        Movie::factory(10)->create();
+        $categories = Category::all();
+        Movie::factory()
+            ->hasAttached(
+                $categories
+            )
+            ->count(10)
+            ->create();
     }
 }
