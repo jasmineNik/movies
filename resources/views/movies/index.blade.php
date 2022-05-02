@@ -5,7 +5,11 @@
     @forelse($movies as $movie)
             <tr>
                 <td>{{$movie->name}}</td>
-                <td>{{$movie->desc}}</td>
+                <td>{{$movie->description}}</td>
+                <td>
+                    @auth<a href="/movie/{{$movie->id}}">Edit</a>
+                    @endauth
+                </td>
             </tr>
     @empty
         <p>No data</p>

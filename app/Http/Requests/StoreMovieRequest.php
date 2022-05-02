@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreMovieRequest extends FormRequest
@@ -23,12 +24,19 @@ class StoreMovieRequest extends FormRequest
      */
     public function rules()
     {
+//        dd($this->request->all());
         return [
             "name" => "required|string",
-            "description" => "required|min:255|max:1500",
-            "poster" => "sometimes|mimes:jpg,jpeg,png",
+            "description" => "required|min:10|max:1500",
+            "poster" => "sometimes|mimes:png",
             "date" => "date",
             "price" => "sometimes|numeric"
         ];
     }
+
+
+//    public function failedValidation(Validator $validator)
+//    {
+//        dd($validator->errors());
+//    }
 }

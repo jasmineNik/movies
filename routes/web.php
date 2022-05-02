@@ -30,7 +30,24 @@ Route::get('/dashboard/{id?}/{name?}', function ($id=null, $name=null){
     ->whereNumber('id')->whereAlpha('name')
     ->name('dashboard');
 
-Route::get('/movies', [MovieController::class, 'index'])
-    ->name('movies');
-Route::get('/movie', [MovieController::class, 'create']);
-Route::post('/movie', [MovieController::class, 'store']);
+
+Route::controller(MovieController::class)->group(function (){
+    Route::get('/movies', 'index')
+        ->name('movies');
+});
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+    Route::controller(MovieController::class)->group(function (){
+        Route::get('/movie', 'create');
+        Route::post('/movie','store');
+        Route::get('/movie/{id}', 'edit')
+            ->whereNumber('id');
+    });
+});
