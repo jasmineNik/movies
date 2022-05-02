@@ -12,8 +12,8 @@
     @endif
     <form action="movie" method="post" enctype="multipart/form-data">
         @csrf
-        <input type="text" name="name">
-        <textarea  name="description"> </textarea>
+        <input type="text" name="name" value="{{old('name')}}">
+        <textarea  name="description">{{old('description')}} </textarea>
         <input type="file" name="poster" accept="image/*">
         <input type="number" name="price">
         <input type="date" name="date">

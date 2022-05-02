@@ -6,7 +6,10 @@
             <tr>
                 <td>{{$movie->name}}</td>
                 <td>{{$movie->description}}</td>
-                <td><a href="/movie/{{$movie->id}}">Edit</a></td>
+                <td>
+                    @auth<a href="/movie/{{$movie->id}}">Edit</a>
+                    @endauth
+                </td>
             </tr>
     @empty
         <p>No data</p>
