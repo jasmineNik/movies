@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Movie>
+ * @extends Factory
  */
 class MovieFactory extends Factory
 {
@@ -17,9 +18,10 @@ class MovieFactory extends Factory
     public function definition()
     {
         return [
-            "name" => $this->faker->name,
-            "desc" => $this->faker->text,
-            "poster" => $this->faker->url
+            "name" => $this->faker->name(),
+            "description" => $this->faker->text(),
+            "poster" => $this->faker->url(),
+            "date" => Carbon::now(),
         ];
     }
 }

@@ -30,5 +30,7 @@ Route::get('/dashboard/{id?}/{name?}', function ($id=null, $name=null){
     ->whereNumber('id')->whereAlpha('name')
     ->name('dashboard');
 
-Route::get('/movie', [MovieController::class, 'index'])
-    ->name('movie');
+Route::get('/movies', [MovieController::class, 'index'])
+    ->name('movies');
+Route::get('/movie', [MovieController::class, 'create']);
+Route::post('/movie', [MovieController::class, 'store']);

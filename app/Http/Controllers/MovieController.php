@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Movie;
 use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
+use Illuminate\Auth\Events\Validated;
+use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
@@ -26,7 +29,8 @@ class MovieController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return response()->view('movies.create', compact('categories'));
     }
 
     /**
@@ -35,9 +39,10 @@ class MovieController extends Controller
      * @param  \App\Http\Requests\StoreMovieRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMovieRequest $request)
+    public function store(Request $request)
     {
-        //
+        dd($request->all());
+
     }
 
     /**
