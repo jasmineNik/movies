@@ -49,5 +49,6 @@ Route::middleware([
         Route::post('/movie','store');
         Route::get('/movie/{id}', 'edit')
             ->whereNumber('id');
+            Route::put('update-data/{id}','update');
     });
 });

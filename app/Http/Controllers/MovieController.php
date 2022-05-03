@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateMovieRequest;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Redirect;
 
 class MovieController extends Controller
 {
@@ -82,9 +83,16 @@ class MovieController extends Controller
      * @param  \App\Models\Movie  $movie
      * @return Response
      */
-    public function update(UpdateMovieRequest $request, Movie $movie)
+    public function update ($request,$id)
     {
-        //
+        $movie = Movie :: find($id);
+        $movie->name = $request->input('name');
+        $movie->description = $request->input('description');
+        $movie->poster = $request->input('poster');
+        $movie->price  = $request->input('date');
+        $movie->date = $request->input('date');
+        $movie->update();
+        return Redirect('/')->width('update-Successfully');
     }
 
     /**
@@ -97,4 +105,5 @@ class MovieController extends Controller
     {
         //
     }
+   
 }
