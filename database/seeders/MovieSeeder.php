@@ -22,7 +22,7 @@ class MovieSeeder extends Seeder
             ->hasAttached(
                 $categories
             )
-            ->count(10)
+            ->count(19)
             ->create();
     }
 }
