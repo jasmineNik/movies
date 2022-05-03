@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Language;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
+
 
 class LanguageSeeder extends Seeder
 {
@@ -14,6 +17,12 @@ class LanguageSeeder extends Seeder
      */
     public function run()
     {
-        //
-    }
+        Language::factory()
+            ->state(new Sequence(
+                ["name" => "Armenian"],
+                ["name" => "English"],
+                ["name" => "Russian"],
+            )) 
+             ->count(2)->create();
+            }
 }

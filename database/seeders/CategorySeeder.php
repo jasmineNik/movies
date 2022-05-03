@@ -18,9 +18,22 @@ class CategorySeeder extends Seeder
     {
         Category::factory()
             ->state(new Sequence(
-                ["name" => "horror"],
-                ["name" => "drama"],
+                ["name" => "Action"],
+                ["name" => "Adventure"],
+                ["name" => "Animal"],
+                ["name" => "Animated"],
+                ["name" => "Comedy"],
+                ["name" => "Documentary"],
+                ["name" => "Dramma"],
+                ["name" => "Horror"],
+                ["name" => "Romance"],
+                ["name" => "Musical"],
+                ["name" => "War"],
+
+
+
+                
             ))
-            ->count(2)->create();
+            ->count(11)->create();
     }
 }
