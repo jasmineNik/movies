@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Language extends Model
+class PLayer extends Model
 {
     protected $fillable = ['name'];
 
@@ -14,3 +14,4 @@ class Language extends Model
         return $this->belongsToMany(Movie::class);
     }
 }
+
