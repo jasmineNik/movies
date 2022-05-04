@@ -17,4 +17,9 @@ class Movie extends Model
     {
         return $this->belongsToMany(Category::class);
     }
+
+    public function scopeId($query, $id)
+    {
+        return $query->where('id', $id);
+    }
 }

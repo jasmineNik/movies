@@ -30,7 +30,9 @@ class StoreMovieRequest extends FormRequest
             "description" => "required|min:10|max:1500",
             "poster" => "sometimes|mimes:png",
             "date" => "date",
-            "price" => "sometimes|numeric"
+            "price" => "sometimes|numeric",
+            "categories" => "array",
+            "categories.*.category_id" => "required|numeric|exists:categories,id"
         ];
     }
 

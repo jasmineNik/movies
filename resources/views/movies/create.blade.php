@@ -13,17 +13,17 @@
     <form action="movie" method="post" enctype="multipart/form-data">
         @csrf
         <input type="text" name="name" value="{{old('name')}}">
-        <textarea  name="description">{{old('description')}} </textarea>
+        <textarea name="description">{{old('description')}} </textarea>
         <input type="file" name="poster" accept="image/*">
         <input type="number" name="price">
         <input type="date" name="date">
-        <select name="category" id="">
-            @forelse($categories as $category)
-                <option value="{{$category->id}}">{{$category->name}}</option>
-            @empty
-                No category
-            @endforelse
-        </select>
+
+        @forelse($categories as $index => $category)
+            <input name="categories[{{$index}}][category_id]" type="checkbox" value="{{$category->id}}">{{$category->name}}
+        @empty
+            No category
+        @endforelse
+
         <input type="submit" value="Create">
     </form>
 @endsection
