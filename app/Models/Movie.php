@@ -17,6 +17,12 @@ class Movie extends Model
     {
         return $this->belongsToMany(Category::class);
     }
+
+    public function scopeId($query, $id)
+    {
+        return $query->where('id', $id);
+    }
+
     public function stufts()
     {
         return $this->belongsToMany(Stuft::class);
@@ -59,5 +65,4 @@ class Movie extends Model
     {
         return $this->belongsToMany(Type::class);
     }
-    
 }

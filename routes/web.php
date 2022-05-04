@@ -45,9 +45,11 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
     Route::controller(MovieController::class)->group(function (){
-        Route::get('/movie', 'create');
+        Route::get('/movie', 'create')->name('add_movie');
         Route::post('/movie','store');
         Route::get('/movie/{id}', 'edit')
             ->whereNumber('id');
+        Route::put('/movie', 'update')
+            ->name('movie_update');
     });
 });

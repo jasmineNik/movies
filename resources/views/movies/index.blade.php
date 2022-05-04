@@ -1,6 +1,7 @@
 @extends('welcome')
 @section('Title', 'All Movies')
 @section('content')
+    <a href="{{route("add_movie")}}">Add new movie</a>
     <table>
     @forelse($movies as $movie)
             <tr>

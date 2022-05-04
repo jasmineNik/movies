@@ -43,6 +43,7 @@ class MovieController extends Controller
     public function store(StoreMovieRequest $request)
     {
         $movie = Movie::create($request->validated());
+        $movie->categories()->attach($request->validated()['categories']);
         return response()->redirectToRoute('movies');
     }
 
@@ -72,19 +73,23 @@ class MovieController extends Controller
 //        }
         $categories = Category::all();
         $movie = Movie::findOrFail($id);
-        return \response()->view('movies.edit', compact('movie', 'categories'));
+        $movie_categories = $movie->categories()->get();
+
+        return \response()->view('movies.edit', compact('movie', 'categories', 'movie_categories'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateMovieRequest  $request
-     * @param  \App\Models\Movie  $movie
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateMovieRequest $request, Movie $movie)
+    public function update(UpdateMovieRequest $request)
     {
-        //
+        $movie = Movie::id($request->validated()['id'])->first();
+        $movie->categories()->sync($request->validated()['categories']);
+        $movie->update($request->validated());
+        return \response()->redirectToRoute('movies');
     }
 
     /**
