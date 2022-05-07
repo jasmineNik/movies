@@ -31,7 +31,8 @@ class UpdateMovieRequest extends FormRequest
             "poster" => "sometimes|mimes:png",
             "date" => "date",
             "price" => "sometimes|numeric",
-            "categories.*.category_id" => "required|numeric|exists:categories,id"
+            "categories.*.category_id" => "required|numeric|exists:categories,id",
+            "languages.*.language_id" => "required|numeric|exists:languages,id"
         ];
     }
 }

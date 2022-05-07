@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Language;
 use App\Models\Movie;
 use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
+use App\Http\Requests\StoreLanguageRequest;
+use App\Http\Requests\UpdateLanguageRequest;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -31,7 +34,9 @@ class MovieController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return response()->view('movies.create', compact('categories'));
+        $languages = Language::all();
+        return response()->view('movies.create',
+         compact('categories','languages'));
     }
 
     /**
@@ -44,7 +49,9 @@ class MovieController extends Controller
     {
         $movie = Movie::create($request->validated());
         $movie->categories()->attach($request->validated()['categories']);
+        $movie->languages()->attach($request->validated()['languages']);
         return response()->redirectToRoute('movies');
+
     }
 
     /**
@@ -74,8 +81,10 @@ class MovieController extends Controller
         $categories = Category::all();
         $movie = Movie::findOrFail($id);
         $movie_categories = $movie->categories()->get();
+        $languages = Language::all();
+        $movie_languages = $movie->languages()->get();
 
-        return \response()->view('movies.edit', compact('movie', 'categories', 'movie_categories'));
+        return \response()->view('movies.edit', compact('movie', 'languages', 'movie_languages','movie','categories','movie_categories'));
     }
 
     /**
@@ -88,6 +97,7 @@ class MovieController extends Controller
     {
         $movie = Movie::id($request->validated()['id'])->first();
         $movie->categories()->sync($request->validated()['categories']);
+        $movie->languages()->sync($request->validated()['languages']);
         $movie->update($request->validated());
         return \response()->redirectToRoute('movies');
     }
