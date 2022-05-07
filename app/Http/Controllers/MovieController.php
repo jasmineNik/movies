@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+
 use App\Models\Language;
+
+use App\Models\Country;
+
 use App\Models\Movie;
 use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
@@ -23,7 +27,8 @@ class MovieController extends Controller
     public function index()
     {
         $movies  = Movie::all();
-        return response()->view('movies.index', compact('movies'));
+        return response()->view('movies.index',
+            compact('movies'));
     }
 
     /**
@@ -34,9 +39,13 @@ class MovieController extends Controller
     public function create()
     {
         $categories = Category::all();
+
         $languages = Language::all();
+
+        $countries = Country::all();
         return response()->view('movies.create',
-         compact('categories','languages'));
+            compact('categories', 'countries','languages'));
+
     }
 
     /**
@@ -84,7 +93,8 @@ class MovieController extends Controller
         $languages = Language::all();
         $movie_languages = $movie->languages()->get();
 
-        return \response()->view('movies.edit', compact('movie', 'languages', 'movie_languages','movie','categories','movie_categories'));
+
+        return \response()->view('movies.edit', compact('movie', 'languages', 'movie_languages', 'movie', 'categories', 'movie_categories'));
     }
 
     /**

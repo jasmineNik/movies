@@ -38,7 +38,7 @@
 
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 @section('content')
-                    <h1>Hello</h1>
+                    <h1>{{__('hello')}}</h1>
                     @isset($name)
                     {{$name}}
                     @endisset
