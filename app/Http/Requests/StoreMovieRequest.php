@@ -26,9 +26,9 @@ class StoreMovieRequest extends FormRequest
     {
 //        dd($this->request->all());
         return [
-            "name" => "required|string",
+            "name" => "bail|required|string",
             "description" => "required|min:10|max:1500",
-            "poster" => "sometimes|mimes:png",
+            "poster" => "sometimes|nullable|mimes:png,jpg,jpeg",
             "date" => "date",
             "price" => "sometimes|numeric",
             "categories" => "array",
