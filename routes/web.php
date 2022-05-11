@@ -15,8 +15,6 @@ use App\Http\Controllers\MovieController;
 */
 Route::middleware('local')->group(function (){
     Route::get('/', function () {
-        app()->setLocale('hy');
-        echo app()->getLocale();
         return view('welcome', ['name' => 'Admin']);
     });
 
