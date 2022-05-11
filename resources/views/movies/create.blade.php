@@ -28,6 +28,11 @@
     @empty
         No language
     @endforelse
+    @forelse($countries as $index => $country)
+    <input name="countries[{{$index}}][country_id]" type="checkbox" value="{{$country->id}}">{{$country->name}}
+@empty
+    No country
+@endforelse
         <input type="submit" value="Create">
     </form>
 @endsection

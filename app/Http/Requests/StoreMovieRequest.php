@@ -35,6 +35,8 @@ class StoreMovieRequest extends FormRequest
             "categories.*.category_id" => "required|numeric|exists:categories,id",
             "languages" => "array",
             "languages.*.language_id" => "required|numeric|exists:languages,id",
+            "countries" => "array",
+            "countries.*.country_id" => "required|numeric|exists:countries,id",
         ];
     }
 

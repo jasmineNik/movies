@@ -41,7 +41,7 @@ class Movie extends Model
     {
         return $this->belongsToMany(Player::class);
     }
-    public function countres()
+    public function countries()
     {
         return $this->belongsToMany(Country::class);
     }

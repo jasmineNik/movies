@@ -11,8 +11,8 @@ use App\Models\Country;
 use App\Models\Movie;
 use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
-use App\Http\Requests\StoreLanguageRequest;
-use App\Http\Requests\UpdateLanguageRequest;
+// use App\Http\Requests\StoreLanguageRequest;
+// use App\Http\Requests\UpdateLanguageRequest;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -59,6 +59,7 @@ class MovieController extends Controller
         $movie = Movie::create($request->validated());
         $movie->categories()->attach($request->validated()['categories']);
         $movie->languages()->attach($request->validated()['languages']);
+        $movie->countries()->attach($request->validated()['countries']);
         return response()->redirectToRoute('movies');
 
     }
