@@ -17,11 +17,98 @@
         <style>
             body {
                 font-family: 'Nunito', sans-serif;
+                background-color:black ;
             }
+.dash{
+    line-height: 1.6;
+			z-index: 1;
+			position: relative;
+			text-align: center;
+			padding-top: 40vh;
+			font-size: 20.0px;
+			text-align: center;
+			padding: 20%;
+			color: white;
+			background: rgba(0,0,0,0.7);
+			text-shadow: 0px 2px 5px black,
+							0px 4px 10px rgb(0,0,0,0.4),
+							0px 10px 20px rgb(0,0,0,0.6);
+		    font-weight: 400;
+
+}
+ .slideshow{
+
+position: fixed;
+width: 100%;
+height: 100%;
+top: 0;
+left: 0;
+z-index: 0;
+list-style: none;
+margin: 0;
+padding: 0;
+}
+
+.slideshow li{
+width: 100%;
+height: 100%;
+position: absolute;
+top: 0;
+left: 0;
+background-size: cover;
+background-position: 50% 50%;
+background-repeat: no-repeat;
+opacity: 0;
+z-index: 0;
+animation: imageAnimation 25s linear infinite;
+}
+
+.slideshow li:nth-child(1){
+background-image: url(stylesheets/img1.jpg);
+
+}
+
+
+.slideshow li:nth-child(2){
+background-image: url(https://wallpapercave.com/wp/1mQZjV4.jpg);
+animation-delay: 5s;
+}
+.slideshow li:nth-child(3){
+background-image: url(https://wallpapercave.com/wp/Ciw293N.jpg);
+animation-delay: 10s;
+}
+.slideshow li:nth-child(4){
+background-image: url(https://wallpapercave.com/wp/qrH68Im.jpg);
+animation-delay: 15s;
+}
+.slideshow li:nth-child(5){
+background-image: url(https://wallpapercave.com/wp/o7zCmCn.jpg);
+animation-delay: 20s;
+}
+
+@keyframes imageAnimation {
+0% {
+    opacity: 0;
+    animation-timing-function: ease-in;
+}
+10% {
+    opacity: 1;
+    animation-timing-function: ease-out;
+}
+
+20%{
+    opacity: 1;}
+
+30%{
+    opacity: 0;
+}
+}
+
+
         </style>
     </head>
     <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+        <div class="dash">
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
@@ -46,5 +133,16 @@
                 @yield('content')
             </div>
         </div>
+        
+	
+	<ul class="slideshow">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+    
+
     </body>
 </html>

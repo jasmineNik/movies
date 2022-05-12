@@ -71,11 +71,11 @@ class MovieController extends Controller
     {
 
         $poster = $request->file('poster');
-//        $path = $poster->move(public_path("images"),
-//            $poster->getClientOriginalName());
-        $path = $poster->storeAs('public/images',
-            $poster->getClientOriginalName());
-        dd($path);
+    //    $path = $poster->move(public_path("images"),
+        //    $poster->getClientOriginalName());
+        // $path = $poster->storeAs('public/images',
+        //     $poster->getClientOriginalName());
+        // dd($path);
         $movie = Movie::create($request->validated());
         $movie->categories()->attach($request->validated()['categories']);
         $movie->languages()->attach($request->validated()['languages']);
