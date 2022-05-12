@@ -39,7 +39,16 @@
         @empty
             No category
         @endforelse
-
+        @forelse($languages as $index => $language)
+        <input name="languages[{{$index}}][language_id]" type="checkbox" value="{{$language->id}}">{{$language->name}}
+    @empty
+        No language
+    @endforelse
+    @forelse($countries as $index => $country)
+    <input name="countries[{{$index}}][country_id]" type="checkbox" value="{{$country->id}}">{{$country->name}}
+@empty
+    No country
+@endforelse
         <input type="submit" value="Create">
     </form>
 @endsection

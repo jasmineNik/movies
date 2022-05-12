@@ -32,7 +32,11 @@ class StoreMovieRequest extends FormRequest
             "date" => "date",
             "price" => "sometimes|numeric",
             "categories" => "array",
-            "categories.*.category_id" => "required|numeric|exists:categories,id"
+            "categories.*.category_id" => "required|numeric|exists:categories,id",
+            "languages" => "array",
+            "languages.*.language_id" => "required|numeric|exists:languages,id",
+            "countries" => "array",
+            "countries.*.country_id" => "required|numeric|exists:countries,id",
         ];
     }
 

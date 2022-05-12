@@ -15,8 +15,12 @@ return new class extends Migration
     {
         Schema::create('language_movie', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('movie_id')->constrained('movies')
-                ->cascadeOnDelete()->cascadeOnUpdate();
+            $table->unsignedBigInteger('movie_id');
+            $table->foreign('movie_id')
+                ->references('id')
+                ->on('movies')
+                ->cascadeOnUpdate()
+                ->onDelete('cascade');
             $table->foreignId('language_id')
                 ->constrained('languages')
                 ->cascadeOnUpdate()

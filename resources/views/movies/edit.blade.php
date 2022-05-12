@@ -29,6 +29,16 @@
             @empty
                 No category
             @endforelse
+            @forelse($languages as $index => $language)
+            <input type="checkbox"
+               @foreach($movie_languages as $movie_language)
+                 {{$movie_language->id === $language->id? 'checked' : ''}}
+               @endforeach
+                   value="{{$language->id}}"
+                   name="languages[{{$index}}][language_id]">{{$language->name}}
+            @empty
+                No language
+            @endforelse
         <input type="submit" value="Edit">
     </form>
 @endsection
