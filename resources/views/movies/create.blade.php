@@ -49,6 +49,12 @@
 @empty
     No country
 @endforelse
+@forelse($ages as $index => $age)
+            <input name="ages[{{$index}}][age_id]" type="radio" value="{{$age->id}}">{{$age->name}}
+        @empty
+            No category
+        @endforelse
+
         <input type="submit" value="Create">
     </form>
 @endsection

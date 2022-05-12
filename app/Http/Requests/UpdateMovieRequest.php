@@ -30,6 +30,7 @@ class UpdateMovieRequest extends FormRequest
             "description" => "required|min:10|max:1500",
             "poster" => "sometimes|mimes:png",
             "date" => "date",
+            
             "price" => "sometimes|numeric",
             "categories.*.category_id" => "required|numeric|exists:categories,id",
             "languages.*.language_id" => "required|numeric|exists:languages,id"
