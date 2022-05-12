@@ -14,8 +14,16 @@ return new class extends Migration
     public function up()
     {
         Schema::create('age_movie', function (Blueprint $table) {
+            
             $table->id();
+            $table->foreignId('movie_id')->constrained('movies')
+                ->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('age_id')
+                ->constrained('ages')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->timestamps();
+           
         });
     }
 

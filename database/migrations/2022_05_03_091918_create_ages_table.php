@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('ages', function (Blueprint $table) {
             $table->id();
-            $table->age();
+            $table->integer('age');
             $table->timestamps();
         });
     }

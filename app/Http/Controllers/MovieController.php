@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Age;
+// use App\Models\Age;
 use App\Models\Language;
 
 use App\Models\Country;
@@ -54,10 +54,14 @@ class MovieController extends Controller
         $categories = Category::all();
 
         $languages = Language::all();
-        $ages = Age::all();
+        // $ages = Age::all();
         $countries = Country::all();
         return response()->view('movies.create',
-            compact('categories', 'countries','languages','ages'));
+            compact('categories',
+            'countries',
+            'languages',
+            // 'ages'
+        ));
 
     }
 
@@ -114,10 +118,15 @@ class MovieController extends Controller
         $movie_categories = $movie->categories()->get();
         $languages = Language::all();
         $movie_languages = $movie->languages()->get();
-        $ages = Age::all();
-        $movie_ages = $movie->ages()->get();
+        // $ages = Age::all();
+        // $movie_ages = $movie->ages()->get();
 
-        return \response()->view('movies.edit', compact('movie', 'languages', 'movie_languages', 'movie', 'categories', 'movie_categories'));
+        return \response()->view('movies.edit', compact('movie', 'languages', 'movie_languages',
+         'movie', 'categories', 'movie_categories',
+        //  'movie', 'ages', 'movie_ages',
+         
+
+        ));
     }
 
     /**
@@ -131,7 +140,7 @@ class MovieController extends Controller
         $movie = Movie::id($request->validated()['id'])->first();
         $movie->categories()->sync($request->validated()['categories']);
         $movie->languages()->sync($request->validated()['languages']);
-        $movie->ages()->sync($request->validated()['ages']);
+        // $movie->ages()->sync($request->validated()['ages']);
         $movie->update($request->validated());
         return \response()->redirectToRoute('movies');
     }
