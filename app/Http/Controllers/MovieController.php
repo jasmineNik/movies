@@ -57,16 +57,17 @@ class MovieController extends Controller
      * @param  \App\Http\Requests\StoreMovieRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreMovieRequest $request)
     {
-
-        $poster = $request->file('poster');
-//        $path = $poster->move(public_path("images"),
-//            $poster->getClientOriginalName());
-        $path = $poster->storeAs('public/images',
-            $poster->getClientOriginalName());
-        dd($path);
-        $movie = Movie::create($request->validated());
+        $path = null;
+        if ($request->hasFile('poster')){
+            $poster = $request->file('poster');
+            $path = $poster->storeAs('public/images',
+                $poster->getClientOriginalName());
+        }
+        $data = $request->validated();
+        $data['poster'] = str_replace('public', 'storage', $path);
+        $movie = Movie::create($data);
         $movie->categories()->attach($request->validated()['categories']);
         return response()->redirectToRoute('movies');
     }
@@ -74,12 +75,13 @@ class MovieController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Movie  $movie
+     * @param
      * @return Response
      */
-    public function show(Movie $movie)
+    public function show($id)
     {
-        //
+        $movie = Movie::findOrFail($id);
+        return \response()->view('movies.show', compact('movie'));
     }
 
     /**
@@ -90,13 +92,10 @@ class MovieController extends Controller
      */
     public function edit($id)
     {
-//        $movie = Movie::where('id', $id)->first();
-//        $movie = Movie::find($id);
-//        if(empty($movie)){
-//            abort(404, 'where is no movie');
-//        }
+
         $categories = Category::all();
         $movie = Movie::findOrFail($id);
+
         $movie_categories = $movie->categories()->get();
 
         return \response()->view('movies.edit',
@@ -112,8 +111,16 @@ class MovieController extends Controller
     public function update(UpdateMovieRequest $request)
     {
         $movie = Movie::id($request->validated()['id'])->first();
+        $path = null;
+        if ($request->hasFile('poster')){
+            $poster = $request->file('poster');
+            $path = $poster->storeAs('public/images',
+                $poster->getClientOriginalName());
+        }
+        $data = $request->validated();
+        $data['poster'] = str_replace('public', 'storage', $path);
         $movie->categories()->sync($request->validated()['categories']);
-        $movie->update($request->validated());
+        $movie->update($data);
         return \response()->redirectToRoute('movies');
     }
 
