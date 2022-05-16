@@ -1,8 +1,7 @@
 @extends('welcome')
-@section('Title', 'All Movies')
+@section('Title', 'Add movie')
 @section('content')
 {{--    @error('name')--}}
-{{--    <img src="{{asset("storage/images/3-Login-Page-Screen.jpg")}}" alt="">--}}
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

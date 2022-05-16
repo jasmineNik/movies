@@ -2,15 +2,20 @@
 @section('Title', 'All Movies')
 @section('content')
     <a href="{{route("add_movie")}}">{{__('ADD_MOVIE')}}</a>
-    <a href="{{route("add_movie")}}">{{__('validation.accepted')}}</a>
     <table>
     @forelse($movies as $movie)
             <tr>
                 <td>{{$movie->name}}</td>
                 <td>{{$movie->description}}</td>
                 <td>
-                    @auth<a href="/movie/{{$movie->id}}">Edit</a>
+                    @auth<a href="/movie/{{$movie->id}}/edit">
+                        {{__('EDIT')}}
+                    </a>
                     @endauth
+                    <a href="/movie/{{$movie->id}}">
+{{--                    {{trans_choice('apples', 0)}}--}}
+                        {{__('SHOW')}}
+                    </a>
                 </td>
             </tr>
     @empty

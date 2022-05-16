@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,19 +15,16 @@ use App\Http\Controllers\MovieController;
 |
 */
 Route::middleware('local')->group(function (){
+    Route::get('/provider/{name}',
+        [AuthController::class, 'provider'])
+        ->name('provider');
+    Route::get('/provider/{name}/callback', [AuthController::class, 'providerCallback']);
     Route::get('/', function () {
         return view('welcome', ['name' => 'Admin']);
     });
-
-//Route::view('/', 'welcome', ['name' => 'Admin']);
-//Route::get('/dashboard/{id?}', function ($id=null){
-//    return view('movies.index', ['name' => 'Admin', 'id' => $id]);
-//});
-
     Route::get('/dashboard/{id?}/{name?}', function ($id=null, $name=null){
         return view('dashboard', ['name' => $name, 'id' => $id]);
     })
-//    ->where('id', '[0-9]+')
         ->whereNumber('id')->whereAlpha('name')
         ->name('dashboard');
 
@@ -34,6 +32,8 @@ Route::middleware('local')->group(function (){
     Route::controller(MovieController::class)->group(function (){
         Route::get('/movies', 'index')
             ->name('movies');
+        Route::get('/movie/{id}', 'show')
+            ->whereNumber('id');
     });
 
     Route::middleware([
@@ -47,7 +47,7 @@ Route::middleware('local')->group(function (){
         Route::controller(MovieController::class)->group(function (){
             Route::get('/movie', 'create')->name('add_movie');
             Route::post('/movie','store');
-            Route::get('/movie/{id}', 'edit')
+            Route::get('/movie/{id}/edit', 'edit')
                 ->whereNumber('id');
             Route::put('/movie', 'update')
                 ->name('movie_update');

@@ -1,5 +1,5 @@
 @extends('welcome')
-@section('Title', 'All Movies')
+@section('Title', $movie->name)
 @section('content')
     @if ($errors->any())
         <div class="alert alert-danger">
